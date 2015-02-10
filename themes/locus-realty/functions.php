@@ -80,9 +80,9 @@ function locus_realty_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+	add_filter('mpt_unprotect_meta', '__return_true');
 }
 endif; // locus_realty_setup
-add_action( 'after_setup_theme', 'locus_realty_setup' );
 
 /**
  * Register widget area.

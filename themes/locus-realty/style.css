@@ -449,15 +449,11 @@ table.body-content-table td {
 }
 .home-page-content > .flexslider {max-width:100%;}
 
-/* -------------- AddtoAny Social Share placement --------------- */
-.entry-meta .social{
-	margin-top:1px;
-}
-
 
 /* ---- brian - home page  styles ---- */
 .home-content-wrapper{
 	width: 100%;
+	padding: 0 1em 0 1em;
 }
 .copy{
 	width: 58%;
@@ -481,14 +477,6 @@ table.body-content-table td {
 }
 .right-photo img{
 	width: 100%
-}
-
-/*----------------------plug in styles----------------------------*/
-.email-name h4{
-
-}
-.email-link{
-	font-size: 0.9em;
 }
 
 
@@ -894,7 +882,7 @@ hr.bar{
 	padding-top: 0;
 }
 .dark-gray-callout {
-	background: #333;
+	background: #363636;
 	color: #fff;
 }
 

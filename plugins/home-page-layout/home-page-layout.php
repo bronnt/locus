@@ -54,29 +54,29 @@ function init_homepage_remove_support(){
     remove_post_type_support( $post_type, 'author');
 
     if (class_exists('MultiPostThumbnails')) {
-    new MultiPostThumbnails(
-        array(
-            'label' => 'Small Top Left Image',
-            'id' => 'top-left',
-            'post_type' => 'homepage'
-        )
-    );
-    new MultiPostThumbnails(
-        array(
-            'label' => 'Small Bottom Left Image',
-            'id' => 'bottom-left',
-            'post_type' => 'homepage'
-        )
-    );
-    new MultiPostThumbnails(
-        array(
-            'label' => 'Tall Right Side Image',
-            'id' => 'tall',
-            'post_type' => 'homepage'
-        )
-    );
-}
-
+        new MultiPostThumbnails(
+            array(
+                'label' => 'Small Top Left Image',
+                'id' => 'top-left',
+                'post_type' => 'homepage'
+            )
+        );
+        new MultiPostThumbnails(
+            array(
+                'label' => 'Small Bottom Left Image',
+                'id' => 'bottom-left',
+                'post_type' => 'homepage'
+            )
+        );
+        new MultiPostThumbnails(
+            array(
+                'label' => 'Tall Right Side Image',
+                'id' => 'tall',
+                'post_type' => 'homepage'
+            )
+        );
+    }
+    
 }
 
 
