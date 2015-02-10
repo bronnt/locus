@@ -454,175 +454,34 @@ table.body-content-table td {
 	margin-top:1px;
 }
 
-/* -------------- AddtoAny Social Share placement --------------- */
 
-div.post-image{position:relative;}
-
-div.post-image .featured_category_name{
-	position:absolute;
-	left: 60px;
-	padding: 3px 10px;
-    width: 140px;
-	background:#cc0000;
-	color:#fff;
-	text-transform: uppercase;
-	font-family: 'Open Sans Condensed';
-	font-weight: 300;
-	letter-spacing: 0;
-    
-}
-
-div.post-image .featured_category_name a {
-    color: #fff;
-    text-decoration: none;
-}
-
-div.post-image .featured_category_name p{margin:0;}
-
-.load-more-articles {
-    background: #cc0000;
-    color:#fff;
-    text-align: center;
-    width: 200px;
-    padding: 0.4em 2em;
-    font-family: 'Open Sans Condensed', sans-serif;
-    cursor: pointer;
-    margin: 0 auto 2em auto;
-    display: none;
-}
-
-.see-all-homepage-articles {
-    background: #cc0000;
-    color:#fff;
-    text-align: center;
-    width: 200px;
-    padding: 0.4em 2em;
-    font-family: 'Open Sans Condensed', sans-serif;
-    cursor: pointer;
-    margin: 0 auto 2em auto;
-}
-
-.see-all-homepage-articles a {
-    color:#fff;
-}
-
-.see-all-homepage-articles a:hover {
-    text-decoration: none;
-    color: #fff;
-}
-
-.pagination {
-    background: #cc0000;
-    color:#fff;
-    text-align: center;
-    width: 200px;
-    padding: 0.4em 2em;
-    font-family: 'Open Sans Condensed', sans-serif;
-    cursor: pointer;
-    margin: 0 auto 2em auto;
-    display: none;
-}
-
-.pagination a {
-    color:#fff;
-}
-
-.nav-older {
-    display: inline;
-    float: right;
-}
-
-.nav-newer {
-    display: inline;
-    float: left;
-}
-
-
-.relatedposts h3{
-	text-transform:uppercase;
-	font-size: 1.75em;
-}
-
-.relatedposts .eq-ht-wrapper{
-	padding:0;
-}
-
-.relatedposts .relatedthumb{
-	padding: 0;
-	border: 0;
-/*	margin-left:2%;
-*/}
-
-/*.relatedposts .relatedthumb:first-of-type {
-	margin-left:0;
-}
-
-.relatedposts .relatedthumb:last-of-type{
-	margin-right:0;
-}*/
-
-.relatedposts .relatedthumb img{
-	padding:0;
-	height:auto;
-	margin-bottom: 1em;
-}
-
-.relatedposts .relatedthumb .title{
-	font-size:1.25em;
-	font-family: 'Open Sans Condensed', sans-serif;
-	color:#000;
-}
-
-.relatedposts .relatedthumb a.title:hover, .relatedposts .relatedthumb a.title:focus{
-	color:#cc0000;
-}
-
-
-/* ---- social tab styles ---- */
-#instagram-content, #facebook-content, #twitter-content{
-	/*display: none;*/
-    position:absolute;
-    margin-left: -9999px;
-}
-.social-tabs{
+/* ---- brian - home page  styles ---- */
+.home-content-wrapper{
 	width: 100%;
-	margin: 0 auto;
 }
-.social-tabs div h2{
-	font-family: 'Open Sans Condensed';
-    font-weight: 300;
-	text-transform: uppercase;
+.copy{
+	width: 58%;
+	float: left;
+	padding-right: 1em;
 }
-.social-tabs div h2:hover{
-	cursor: pointer;
+.photo-cluster{
+	padding-top: 87px;
 }
-.social-tab{
-	display: inline-block; /*magic*/
-    height: 70px; 
-    width: 33%;
+.stacked-photos{
+	width: 16.5%;
+	float: right;
 }
-.social-tab a{
-	height: 100%; 
-    width: 100%; 
-    display: block; 
+.stacked-photos img{
+	margin-bottom: -14px;
+	width: 100%
 }
-.insta-horizontal-wrapper{
-	width: 100%;
-    height: 178px;
-    overflow: auto;
-    overflow-y: hidden;
-    margin: 30px auto 50px auto;
-    white-space: nowrap;
+.right-photo{
+	width: 25%;
+	float: right;
 }
-.instagram-unit{
-	display: inline;
-    margin: 20px 10px;
+.right-photo img{
+	width: 100%
 }
-.instagram-unit img{
-	width: 178px;
-}
-
-
 
 /*----------------------plug in styles----------------------------*/
 .email-name h4{

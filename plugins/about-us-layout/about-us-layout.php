@@ -14,13 +14,13 @@ License:
 /*---------------------------------
 * Add a meta box to the UMC email generating custom post type. Reference http://code.tutsplus.com/tutorials/how-to-create-custom-wordpress-writemeta-boxes--wp-20336
 ----------------------------------*/
-add_action( 'init', 'create_newsletter_post_type' );
-function create_newsletter_post_type() {
-    register_post_type( 'newsletter',
+add_action( 'init', 'create_about_post_type' );
+function create_about_post_type() {
+    register_post_type( 'about',
         array(
             'labels' => array(
-                'name' => __( 'Newsletter' ),
-                'singular_name' => __( 'newsletter' )
+                'name' => __( 'Layout About Us' ),
+                'singular_name' => __( 'about' )
             ),
         'public' => true,
         'has_archive' => true,
@@ -35,17 +35,29 @@ function create_newsletter_post_type() {
         )
     );
 }
-
-
-add_action( 'add_meta_boxes', 'newsletter_meta_box_add' );
-function newsletter_meta_box_add(){
-    add_meta_box( 'primary', 'Primary Category', 'newsletter_meta_box_callback', 'newsletter', 'normal', 'high', array( 'box_id' => 'primary'));
-    add_meta_box( 'happening', 'Happening Now', 'newsletter_meta_box_callback', 'newsletter', 'normal', 'high', array( 'box_id' => 'happening'));
-    add_meta_box( 'subtitle', 'Subtitle', 'newsletter_meta_box_callback', 'newsletter', 'normal', 'high', array( 'box_id' => 'subtitle'));
-    add_meta_box( 'student', 'Student Excerpt', 'newsletter_meta_box_callback', 'new sletter', 'normal', 'high', array( 'box_id' => 'student'));
+ /*
+remove wisiwig and other features from about custom post type
+ */
+add_action('init', 'init_about_remove_support',100);
+function init_about_remove_support(){
+    $post_type = 'about';
+    remove_post_type_support( $post_type, 'editor');
+    remove_post_type_support( $post_type, 'comments');
+    remove_post_type_support( $post_type, 'trackbacks');
+    remove_post_type_support( $post_type, 'page-attributes');
+    remove_post_type_support( $post_type, 'custom-fields');
+    remove_post_type_support( $post_type, 'author');
 }
 
-function newsletter_meta_box_callback( $post, $metabox )
+add_action( 'add_meta_boxes', 'about_meta_box_add' );
+function about_meta_box_add(){
+    add_meta_box( 'primary', 'Primary Category', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'primary'));
+    add_meta_box( 'happening', 'Happening Now', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'happening'));
+    add_meta_box( 'subtitle', 'Subtitle', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'subtitle'));
+    add_meta_box( 'student', 'Student Excerpt', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'student'));
+}
+
+function about_meta_box_callback( $post, $metabox )
 {
         $values = get_post_custom( $post->ID );
         $this_box = $metabox['args']['box_id'];
@@ -74,15 +86,14 @@ function newsletter_meta_box_callback( $post, $metabox )
                         echo $option;
                       }
                       ?>
-                </select>  
-                <pre><?php var_dump($categories)?> </pre>           
+                </select>         
             </p> 
     <?php      
 }
 
 
-add_action( 'save_post', 'newsletter_meta_box_save' );
-function newsletter_meta_box_save( $post_id )
+add_action( 'save_post', 'about_meta_box_save' );
+function about_meta_box_save( $post_id )
 {   
     
     // Bail if we're doing an auto save

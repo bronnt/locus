@@ -8,26 +8,55 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<h2 class="page-title"><?php the_title(); ?></h2>
+		
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<?php the_content(); ?>
+		<?php //the_content(); ?>
 		<?php 
 			$custom_fields = get_post_custom();
-			$primary_select = $custom_fields['box_1_text'];
-			$happening_text = $custom_fields[box_2_text][0];
-			$subtitle_text = $custom_fields[box_3_text][0];
-			
-			echo $primary_select; //category red ribbon link on home page with conditional
-			echo "<br/><br/>";
-			echo $happening_text; // Happening Now loop located in sidepbar.php - happening now excerpt
-			echo "<br/><br/>";
-			echo $subtitle_text; // Feature article conditional subtext
-			echo 'this happened';
+			$title = $custom_fields[box_1_text][0];
+			$paragraph_1 = $custom_fields[box_2_text][0];
+			$paragraph_2 = $custom_fields[box_3_text][0];
 		?>
+	
+<div class="home-content-wrapper">
+	<div class='copy'>	
+		<?php if (isset($title)):?>
+		<h2 class="page-title"><?php echo $title; ?></h2>
+		<?php endif ?>
+		<p><?php echo $paragraph_1; ?></p>
+		<?php if (isset($paragraph_2)):?>
+			<p><?php echo $paragraph_2; ?></p>
+		<?php endif ?>
+	</div>
+<div class='photo-cluster'>
+	<div class='right-photo'>
+		<?php if (class_exists('MultiPostThumbnails')) :
+	    MultiPostThumbnails::the_post_thumbnail(
+	        get_post_type(),
+	        'tall'
+	    );
+	    endif; ?>
+	</div>	<!-- .right-photo -->
+	<div class='stacked-photos'>
+		<?php if (class_exists('MultiPostThumbnails')) :
+	    MultiPostThumbnails::the_post_thumbnail(
+	        get_post_type(),
+	        'top-left'
+	    );
+	    endif; ?>
+		<?php if (class_exists('MultiPostThumbnails')) :
+	    MultiPostThumbnails::the_post_thumbnail(
+	        get_post_type(),
+	        'bottom-left'
+	    );
+	    endif; ?>
+	</div><!-- .stacked photos -->
+</div>
+</div><!-- .home-content-wrapper -->
 	</div><!-- .entry-content -->
-	<?php edit_post_link( __( 'Edit', 'umc2014' ), '<footer class="entry-footer"><span class="edit-link">', '</span></footer>' ); ?>
+	<?php //edit_post_link( __( 'Edit', 'umc2014' ), '<footer class="entry-footer"><span class="edit-link">', '</span></footer>' ); ?>
 </article><!-- #post-## -->
 
 

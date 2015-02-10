@@ -21,7 +21,7 @@ function create_post_type() {
     register_post_type( 'homepage',
         array(
             'labels' => array(
-                'name' => __( 'Home Page' ),
+                'name' => __( 'Layout Home Pg' ),
                 'singular_name' => __( 'homepage' )
             ),
         'public' => true,
@@ -41,10 +41,10 @@ function create_post_type() {
 }
 
  /*
-remove wisiwig and other features from email custom post type
+remove wisiwig and other features from homepage custom post type
  */
-add_action('init', 'init_remove_support',100);
-function init_remove_support(){
+add_action('init', 'init_homepage_remove_support',100);
+function init_homepage_remove_support(){
     $post_type = 'homepage';
     remove_post_type_support( $post_type, 'editor');
     remove_post_type_support( $post_type, 'comments');
@@ -52,7 +52,34 @@ function init_remove_support(){
     remove_post_type_support( $post_type, 'page-attributes');
     remove_post_type_support( $post_type, 'custom-fields');
     remove_post_type_support( $post_type, 'author');
+
+    if (class_exists('MultiPostThumbnails')) {
+    new MultiPostThumbnails(
+        array(
+            'label' => 'Small Top Left Image',
+            'id' => 'top-left',
+            'post_type' => 'homepage'
+        )
+    );
+    new MultiPostThumbnails(
+        array(
+            'label' => 'Small Bottom Left Image',
+            'id' => 'bottom-left',
+            'post_type' => 'homepage'
+        )
+    );
+    new MultiPostThumbnails(
+        array(
+            'label' => 'Tall Right Side Image',
+            'id' => 'tall',
+            'post_type' => 'homepage'
+        )
+    );
 }
+
+}
+
+
 
 add_action( 'add_meta_boxes', 'home_page_meta_box_add' );
 function home_page_meta_box_add()
@@ -78,7 +105,7 @@ function home_page_meta_box_callback( $post, $metabox )
         ?>  
             <p>
                 <label for="<?php echo $this_box . '_text'; ?>">Text</label>
-                <textarea class="widefat" cols="50" rows="5" name="<?php echo $this_box . '_text'; ?>" id="<?php echo $this_box . '_text'; ?>" value="<?php echo $text; ?>"><?php echo $text; ?></textarea>
+                <textarea class="widefat" cols="50" rows="4" name="<?php echo $this_box . '_text'; ?>" id="<?php echo $this_box . '_text'; ?>" value="<?php echo $text; ?>"><?php echo $text; ?></textarea>
             </p>
     <?php    
 }
