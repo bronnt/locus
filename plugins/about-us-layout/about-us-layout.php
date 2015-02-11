@@ -65,7 +65,27 @@ function about_meta_box_callback( $post, $metabox )
         $selected = isset( $values[$this_box . '_select'] ) ? esc_attr( $values[$this_box . '_select'][0] ) : '';
         wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
         
-        ?>  
+        ?>
+        <script>
+            jQuery(document).ready( function( $ ) {
+
+                $('#upload_image_button').click(function() {
+
+                    formfield = $('#upload_image').attr('name');
+                    tb_show( '', 'media-upload.php?type=image&amp;TB_iframe=true' );
+                    return false;
+                });
+
+                window.send_to_editor = function(html) {
+
+                    imgurl = $('img',html).attr('src');
+                    $('#upload_image').val(imgurl);
+                    tb_remove();
+                }
+
+            });
+        </script>  
+        
             <p>
                 <label for="<?php echo $this_box . '_text'; ?>">Text Label</label>
                 <input type="textarea" name="<?php echo $this_box . '_text'; ?>" id="<?php echo $this_box . '_text'; ?>" value="<?php echo $text; ?>" />
@@ -79,7 +99,6 @@ function about_meta_box_callback( $post, $metabox )
                         foreach ($categories as $category) {
                         $name = $category->cat_name; 
                         $id = $category->cat_ID;
-                        $niceName = $category->category_nicename;
                         $option = '<option name="'.$name.'" value="'.$name.'" '.selected( $selected,  $name ).' >';
                         $option .= $name;
                         $option .= '</option>';
@@ -90,25 +109,7 @@ function about_meta_box_callback( $post, $metabox )
             </p> 
             <input id="upload_image" type="text" size="36" name="upload_image" value="" />
             <input id="upload_image_button" class="button button-primary button-large" type="button" value="Upload Image" />
-<script>
-    jQuery(document).ready( function( $ ) {
 
-        $('#upload_image_button').click(function() {
-
-            formfield = $('#upload_image').attr('name');
-            tb_show( '', 'media-upload.php?type=image&amp;TB_iframe=true' );
-            return false;
-        });
-
-        window.send_to_editor = function(html) {
-
-            imgurl = $('img',html).attr('src');
-            $('#upload_image').val(imgurl);
-            tb_remove();
-        }
-
-    });
-</script>
     <?php  
 
         function my_admin_scripts() {    
@@ -116,22 +117,23 @@ function about_meta_box_callback( $post, $metabox )
         wp_enqueue_script('thickbox');
         wp_register_script('my-upload', WP_PLUGIN_URL.'image-upload.js', array('jquery','media-upload','thickbox'));
         wp_enqueue_script('my-upload');
+        }
+
+        function my_admin_styles() {
+
+            wp_enqueue_style('thickbox');
+        }
+
+        // better use get_current_screen(); or the global $current_screen
+        if (isset($_GET['page']) && $_GET['page'] == 'my_plugin_page') {
+
+            add_action('admin_enqueue_scripts', 'my_admin_scripts');
+            add_action('admin_enqueue_styles', 'my_admin_styles');
+        }    
 }
+?>
 
-function my_admin_styles() {
-
-    wp_enqueue_style('thickbox');
-}
-
-// better use get_current_screen(); or the global $current_screen
-if (isset($_GET['page']) && $_GET['page'] == 'my_plugin_page') {
-
-    add_action('admin_enqueue_scripts', 'my_admin_scripts');
-    add_action('admin_enqueue_styles', 'my_admin_styles');
-}    
-}
-
-
+<?php  
 add_action( 'save_post', 'about_meta_box_save' );
 function about_meta_box_save( $post_id )
 {   

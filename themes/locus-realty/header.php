@@ -43,7 +43,7 @@
 
       		<section class="left-box">
 	 			<h2 class="nav-left full-wide">
-	 				<a href="#"><img class="locus-logo" src="<?php echo get_template_directory_uri(); ?>/images/global/locus-logo@2x.png"></a>
+	 				<a href="/"><img class="locus-logo" src="<?php echo get_template_directory_uri(); ?>/images/global/locus-logo@2x.png"></a>
 	 			</h2>
 	 		</section>
 			<section class="right-box">

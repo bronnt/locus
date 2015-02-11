@@ -30,25 +30,27 @@ function init_homepage_remove_support(){
     remove_post_type_support( $post_type, 'page-attributes');
     remove_post_type_support( $post_type, 'custom-fields');
     remove_post_type_support( $post_type, 'author');
+    remove_post_type_support( $post_type, 'slug');
+    remove_post_type_support( $post_type, 'revisions');
 
     if (class_exists('MultiPostThumbnails')) {
         new MultiPostThumbnails(
             array(
-                'label' => '<h2>Small Top Left Image</h2>This image should be square and roughly 150px * 150px',
+                'label' => 'Small Top Left Image 150px * 150px',
                 'id' => 'top-left',
                 'post_type' => 'homepage'
             )
         );
         new MultiPostThumbnails(
             array(
-                'label' => '<h2>Small Bottom Left Image</h2>This image should be square and roughly 150px * 150px',
+                'label' => 'Small Bottom Left Image 150px * 150px',
                 'id' => 'bottom-left',
                 'post_type' => 'homepage'
             )
         );
         new MultiPostThumbnails(
             array(
-                'label' => '<h2>Tall Right Side Image</h2>This image should be roughly 234px * 350px',
+                'label' => 'Tall Right Side Image 234px * 350px',
                 'id' => 'tall',
                 'post_type' => 'homepage'
             )
@@ -62,10 +64,10 @@ function init_homepage_remove_support(){
 add_action( 'add_meta_boxes', 'home_page_meta_box_add' );
 function home_page_meta_box_add()
 {
-    add_meta_box( 'box_1', 'Main Paragraph Title', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_1'));
-    add_meta_box( 'box_2', 'Main Paragraph Body Text', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_2'));
-    add_meta_box( 'box_3', 'Happening Now Position 1', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_3'));
-    add_meta_box( 'box_4', 'Happening Now Position 2', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_4'));
+    add_meta_box( 'box_1', 'Title', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_1'));
+    add_meta_box( 'box_2', 'Paragraph 1', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_2'));
+    add_meta_box( 'box_3', 'Paragraph 2', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_3'));
+    //add_meta_box( 'box_4', 'Happening Now Position 2', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_4'));
     /*add_meta_box( 'box_5', 'Happening Now Position 3', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_5'));
     add_meta_box( 'box_6', 'Happening Now Position 4', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_6'));
     add_meta_box( 'box_7', 'Happening Now Position 5', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_7'));
@@ -82,7 +84,7 @@ function home_page_meta_box_callback( $post, $metabox )
         wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
         ?>  
             <p>
-                <label for="<?php echo $this_box . '_text'; ?>">Text</label>
+                
                 <textarea class="widefat" cols="50" rows="4" name="<?php echo $this_box . '_text'; ?>" id="<?php echo $this_box . '_text'; ?>" value="<?php echo $text; ?>"><?php echo $text; ?></textarea>
             </p>
     <?php    
