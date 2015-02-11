@@ -51,10 +51,10 @@ function init_about_remove_support(){
 
 add_action( 'add_meta_boxes', 'about_meta_box_add' );
 function about_meta_box_add(){
-    add_meta_box( 'primary', 'Primary Category', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'primary'));
-    add_meta_box( 'happening', 'Happening Now', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'happening'));
-    add_meta_box( 'subtitle', 'Subtitle', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'subtitle'));
-    add_meta_box( 'student', 'Student Excerpt', 'newsletter_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'student'));
+    add_meta_box( 'primary', 'Primary Category', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'primary'));
+    //add_meta_box( 'happening', 'Happening Now', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'happening'));
+    //add_meta_box( 'subtitle', 'Subtitle', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'subtitle'));
+    //add_meta_box( 'student', 'Student Excerpt', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'student'));
 }
 
 function about_meta_box_callback( $post, $metabox )
@@ -88,7 +88,47 @@ function about_meta_box_callback( $post, $metabox )
                       ?>
                 </select>         
             </p> 
-    <?php      
+            <input id="upload_image" type="text" size="36" name="upload_image" value="" />
+            <input id="upload_image_button" class="button button-primary button-large" type="button" value="Upload Image" />
+<script>
+    jQuery(document).ready( function( $ ) {
+
+        $('#upload_image_button').click(function() {
+
+            formfield = $('#upload_image').attr('name');
+            tb_show( '', 'media-upload.php?type=image&amp;TB_iframe=true' );
+            return false;
+        });
+
+        window.send_to_editor = function(html) {
+
+            imgurl = $('img',html).attr('src');
+            $('#upload_image').val(imgurl);
+            tb_remove();
+        }
+
+    });
+</script>
+    <?php  
+
+        function my_admin_scripts() {    
+        wp_enqueue_script('media-upload');
+        wp_enqueue_script('thickbox');
+        wp_register_script('my-upload', WP_PLUGIN_URL.'image-upload.js', array('jquery','media-upload','thickbox'));
+        wp_enqueue_script('my-upload');
+}
+
+function my_admin_styles() {
+
+    wp_enqueue_style('thickbox');
+}
+
+// better use get_current_screen(); or the global $current_screen
+if (isset($_GET['page']) && $_GET['page'] == 'my_plugin_page') {
+
+    add_action('admin_enqueue_scripts', 'my_admin_scripts');
+    add_action('admin_enqueue_styles', 'my_admin_styles');
+}    
 }
 
 
