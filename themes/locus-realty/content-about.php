@@ -15,18 +15,27 @@
 		<?php the_content(); ?>
 		<?php 
 			$custom_fields = get_post_custom();
-			$primary_select = $custom_fields[primary_select][0];
-			$happening_text = $custom_fields[happening_text][0];
-			$subtitle_text = $custom_fields[subtitle_text][0];
-			$student_text = $custom_fields[student_text][0];
+			$title_1 = $custom_fields[box_1_title_text][0];
+			$body_1 = $custom_fields[box_1_body_text][0];
+			$img_url_1 = $custom_fields[box_1_img_url][0];
+
+			$title_2 = $custom_fields[box_2_title_text][0];
+			$body_2 = $custom_fields[box_2_body_text][0];
+			$img_url_2 = $custom_fields[box_2_img_url][0];
 			
-			echo $primary_select; //category red ribbon link on home page with conditional
+			echo $title_1; 
 			echo "<br/><br/>";
-			echo $happening_text; // Happening Now loop located in sidepbar.php - happening now excerpt
+			echo $body_1; 
 			echo "<br/><br/>";
-			echo $subtitle_text; // Feature article conditional subtext
+			echo $img_url_1;
 			echo "<br/><br/>";
-			echo $student_text; // Email Only for student excerpt
+			echo "<br/><br/>";
+			echo $title_2; 
+			echo "<br/><br/>";
+			echo $body_2; 
+			echo "<br/><br/>";
+			echo $img_url_2; 
+			
 		?>
 	</div><!-- .entry-content -->
 	<?php edit_post_link( __( 'Edit', 'umc2014' ), '<footer class="entry-footer"><span class="edit-link">', '</span></footer>' ); ?>

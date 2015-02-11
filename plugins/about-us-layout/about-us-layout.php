@@ -51,63 +51,45 @@ function init_about_remove_support(){
 
 add_action( 'add_meta_boxes', 'about_meta_box_add' );
 function about_meta_box_add(){
-    add_meta_box( 'primary', 'Primary Category', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'primary'));
-    //add_meta_box( 'happening', 'Happening Now', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'happening'));
-    //add_meta_box( 'subtitle', 'Subtitle', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'subtitle'));
-    //add_meta_box( 'student', 'Student Excerpt', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'student'));
+    add_meta_box( 'box_1', 'First Employee', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'box_1'));
+    //add_meta_box( 'box_2', 'Second Employee', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'box_2'));
 }
 
 function about_meta_box_callback( $post, $metabox )
 {
         $values = get_post_custom( $post->ID );
         $this_box = $metabox['args']['box_id'];
-        $text = isset( $values[$this_box . '_text'] ) ? $values[$this_box . '_text'][0] : '';
-        $selected = isset( $values[$this_box . '_select'] ) ? esc_attr( $values[$this_box . '_select'][0] ) : '';
+        $title_text = isset( $values[$this_box . '_title_text'] ) ? $values[$this_box . '_title_text'][0] : '';
+        $body_text = isset( $values[$this_box . '_body_text'] ) ? $values[$this_box . '_body_text'][0] : '';
+        $img_url = isset( $values[$this_box . '_img_url'] ) ? $values[$this_box . '_img_url'][0] : '';
         wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
         
         ?>
         <script>
             jQuery(document).ready( function( $ ) {
-
                 $('#upload_image_button').click(function() {
-
                     formfield = $('#upload_image').attr('name');
                     tb_show( '', 'media-upload.php?type=image&amp;TB_iframe=true' );
                     return false;
                 });
 
                 window.send_to_editor = function(html) {
-
                     imgurl = $('img',html).attr('src');
                     $('#upload_image').val(imgurl);
                     tb_remove();
                 }
-
             });
         </script>  
-        
-            <p>
-                <label for="<?php echo $this_box . '_text'; ?>">Text Label</label>
-                <input type="textarea" name="<?php echo $this_box . '_text'; ?>" id="<?php echo $this_box . '_text'; ?>" value="<?php echo $text; ?>" />
-            </p>
-            <p> 
-                <label for="<?php echo $this_box . '_select'; ?>">Category</label>
-                 <select name="<?php echo $this_box . '_select'; ?>" id="<?php echo $this_box . '_select'; ?>">
-                    <?php
-                        $categories = get_categories();
 
-                        foreach ($categories as $category) {
-                        $name = $category->cat_name; 
-                        $id = $category->cat_ID;
-                        $option = '<option name="'.$name.'" value="'.$name.'" '.selected( $selected,  $name ).' >';
-                        $option .= $name;
-                        $option .= '</option>';
-                        echo $option;
-                      }
-                      ?>
-                </select>         
-            </p> 
-            <input id="upload_image" type="text" size="36" name="upload_image" value="" />
+            <p>
+                <label for="<?php echo $this_box . '_title_text'; ?>">Name</label>
+                <input type="textarea" name="<?php echo $this_box . '_title_text'; ?>" id="<?php echo $this_box . '_title_text'; ?>" value="<?php echo $title_text; ?>" />
+            </p>
+           <p>
+                <label for="<?php echo $this_box . '_body_text'; ?>">Description</label>
+                <input type="textarea" name="<?php echo $this_box . '_body_text'; ?>" id="<?php echo $this_box . '_body_text'; ?>" value="<?php echo $body_text; ?>" />
+            </p>
+            <input id="upload_image" type="text" size="36" name="upload_image" value="<?php echo $img_url; ?>" />
             <input id="upload_image_button" class="button button-primary button-large" type="button" value="Upload Image" />
 
     <?php  
@@ -115,12 +97,11 @@ function about_meta_box_callback( $post, $metabox )
         function my_admin_scripts() {    
         wp_enqueue_script('media-upload');
         wp_enqueue_script('thickbox');
-        wp_register_script('my-upload', WP_PLUGIN_URL.'image-upload.js', array('jquery','media-upload','thickbox'));
-        wp_enqueue_script('my-upload');
+        //wp_register_script('my-upload', WP_PLUGIN_URL.'image-upload.js', array('jquery','media-upload','thickbox'));
+        //wp_enqueue_script('my-upload');
         }
 
         function my_admin_styles() {
-
             wp_enqueue_style('thickbox');
         }
 
@@ -157,14 +138,12 @@ function about_meta_box_save( $post_id )
         
 // Make sure your data is set before trying to save it
 
-    if( isset( $_POST['primary_text'] ) ) update_post_meta( $post_id, 'primary_text', wp_kses( $_POST['primary_text'], $allowed ) ); 
-    if( isset( $_POST['primary_select']) ) update_post_meta( $post_id, 'primary_select', esc_attr( $_POST['primary_select'] ) );
-    if( isset( $_POST['happening_text'] ) ) update_post_meta( $post_id, 'happening_text', wp_kses( $_POST['happening_text'], $allowed ) ); 
-    if( isset( $_POST['happening_select']) ) update_post_meta( $post_id, 'happening_select', esc_attr( $_POST['happening_select'] ) );
-    if( isset( $_POST['subtitle_text'] ) ) update_post_meta( $post_id, 'subtitle_text', wp_kses( $_POST['subtitle_text'], $allowed ) ); 
-    if( isset( $_POST['subtitle_select']) ) update_post_meta( $post_id, 'subtitle_select', esc_attr( $_POST['subtitle_select'] ) );
-    if( isset( $_POST['student_text'] ) ) update_post_meta( $post_id, 'student_text', wp_kses( $_POST['student_text'], $allowed ) ); 
-    if( isset( $_POST['student_select']) ) update_post_meta( $post_id, 'student_select', esc_attr( $_POST['student_select'] ) );
+    if( isset( $_POST['box_1_title_text'] ) ) update_post_meta( $post_id, 'box_1_title_text', wp_kses( $_POST['box_1_title_text'], $allowed ) ); 
+    if( isset( $_POST['box_1_body_text'] ) ) update_post_meta( $post_id, 'box_1_body_text', wp_kses( $_POST['box_1_body_text'], $allowed ) ); 
+    if( isset( $_POST['box_1_img_url'] ) ) update_post_meta( $post_id, 'box_1_img_url', wp_kses( $_POST['box_1_img_url'], $allowed ) ); 
+    if( isset( $_POST['box_2_title_text'] ) ) update_post_meta( $post_id, 'box_2_title_text', wp_kses( $_POST['box_2_title_text'], $allowed ) ); 
+    if( isset( $_POST['box_2_body_text'] ) ) update_post_meta( $post_id, 'box_2_body_text', wp_kses( $_POST['box_2_body_text'], $allowed ) ); 
+    if( isset( $_POST['box_2_img_url'] ) ) update_post_meta( $post_id, 'box_2_img_url', wp_kses( $_POST['box_2_img_url'], $allowed ) ); 
     }     
 }  
 ?>
