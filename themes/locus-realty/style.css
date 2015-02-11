@@ -447,7 +447,10 @@ table.body-content-table td {
     vertical-align: top; 
     text-align: left;
 }
-.home-page-content > .flexslider {max-width:100%;}
+.homepage-content > .flexslider {
+	max-width:100%;
+	margin: 0 auto;
+}
 
 
 /* ---- brian - home page  styles ---- */

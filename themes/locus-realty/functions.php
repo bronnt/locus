@@ -80,7 +80,7 @@ function locus_realty_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
-	add_filter('mpt_unprotect_meta', '__return_true');
+
 }
 endif; // locus_realty_setup
 
@@ -100,7 +100,7 @@ function locus_realty_widgets_init() {
 		'after_title'   => '</h1>',
 	) );
 		register_sidebar( array(
-		'name'          => __( 'Front Page Widgets', 'umc2014' ),
+		'name'          => __( 'Front Page Widgets', 'locus-realty' ),
 		'id'            => 'front-page',
 		'description'	=> 'Add all home page widgets to this location.',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
@@ -110,7 +110,7 @@ function locus_realty_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Above Post Widgets', 'umc2014' ),
+		'name'          => __( 'Above Post Widgets', 'locus-realty' ),
 		'id'            => 'sidebar-top',
 		'description'	=> 'Add widgets above the post',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
@@ -120,7 +120,7 @@ function locus_realty_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Below Post Widgets', 'umc2014' ),
+		'name'          => __( 'Below Post Widgets', 'locus-realty' ),
 		'id'            => 'sidebar-bottom',
 		'description'	=> 'Add widgets below the post',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
@@ -130,7 +130,7 @@ function locus_realty_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Above Columns Widgets', 'umc2014' ),
+		'name'          => __( 'Above Columns Widgets', 'locus-realty' ),
 		'id'            => 'sidebar-above-columns',
 		'description'	=> 'Add widgets above columns in a two-column layout.',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
@@ -179,6 +179,56 @@ function ie_style_sheets () {
 	wp_enqueue_style( 'ie8');
 }
 add_action ('wp_enqueue_scripts','ie_style_sheets');
+
+
+add_action( 'init', 'create_post_type' );
+function create_post_type() {
+    register_post_type( 'homepage',
+        array(
+            'labels' => array(
+                'name' => __( 'Layout Home Pg' ),
+                'singular_name' => __( 'homepage' )
+            ),
+        'public' => true,
+        'has_archive' => true,
+        'supports' => array(
+        'title',
+        'editor',
+        'custom-fields',
+        'revisions',
+        'thumbnail',
+        'author',
+        'page-attributes',)
+        )
+    );
+}
+
+/**
+ * use homepage custom post type for front page
+ * Note: you also must use single-homepage.php to display the content
+ */
+
+
+function add_homepage_cpt_to_dropdown( $pages ){
+    $args = array(
+        'post_type' => 'homepage'
+    );
+    $items = get_posts($args);
+    $pages = array_merge($pages, $items);
+
+    return $pages;
+}
+add_filter( 'get_pages', 'add_homepage_cpt_to_dropdown' );
+
+function enable_front_page_homepage_cpt( $query ){
+    if('' == $query->query_vars['post_type'] && 0 != $query->query_vars['page_id']){
+    	$query->query_vars['post_type'] = array( 'page', 'homepage' );
+    }
+}
+add_action( 'pre_get_posts', 'enable_front_page_homepage_cpt' );
+
+
+
 /**
  * Implement the Custom Header feature.
  */

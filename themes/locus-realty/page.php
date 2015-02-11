@@ -32,7 +32,7 @@ get_header(); ?>
 							comments_template();
 						endif;
 					?>
-
+					
 				<?php endwhile; // end of the loop. ?>
 				
 			</div><!-- #ten twenty four -->	

@@ -16,29 +16,7 @@ License:
 /**
 * Add custom post types.
 */
-add_action( 'init', 'create_post_type' );
-function create_post_type() {
-    register_post_type( 'homepage',
-        array(
-            'labels' => array(
-                'name' => __( 'Layout Home Pg' ),
-                'singular_name' => __( 'homepage' )
-            ),
-        'public' => true,
-        'has_archive' => true,
-        'supports' => array(
-        'title',
-        'editor',
-        'custom-fields',
-        'revisions',
-        'thumbnail',
-        'author',
-        'page-attributes',)
-        )
-    );
-    /*add_image_size( 'email', 262 ); 
-    add_image_size( 'email-header', 639, 9999 );*/
-}
+
 
  /*
 remove wisiwig and other features from homepage custom post type
@@ -56,27 +34,27 @@ function init_homepage_remove_support(){
     if (class_exists('MultiPostThumbnails')) {
         new MultiPostThumbnails(
             array(
-                'label' => 'Small Top Left Image',
+                'label' => '<h2>Small Top Left Image</h2>This image should be square and roughly 150px * 150px',
                 'id' => 'top-left',
                 'post_type' => 'homepage'
             )
         );
         new MultiPostThumbnails(
             array(
-                'label' => 'Small Bottom Left Image',
+                'label' => '<h2>Small Bottom Left Image</h2>This image should be square and roughly 150px * 150px',
                 'id' => 'bottom-left',
                 'post_type' => 'homepage'
             )
         );
         new MultiPostThumbnails(
             array(
-                'label' => 'Tall Right Side Image',
+                'label' => '<h2>Tall Right Side Image</h2>This image should be roughly 234px * 350px',
                 'id' => 'tall',
                 'post_type' => 'homepage'
             )
         );
     }
-    
+
 }
 
 
