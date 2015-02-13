@@ -27,14 +27,14 @@
 			echo "<br/><br/>";
 			echo $body_1; 
 			echo "<br/><br/>";
-			echo $img_url_1;
+			echo '<img src="' .$img_url_1. '"/>';
 			echo "<br/><br/>";
 			echo "<br/><br/>";
 			echo $title_2; 
 			echo "<br/><br/>";
 			echo $body_2; 
 			echo "<br/><br/>";
-			echo $img_url_2; 
+			echo '<img src="' .$img_url_2. '"/>';
 			
 		?>
 	</div><!-- .entry-content -->
