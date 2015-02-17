@@ -49,29 +49,35 @@ function init_about_remove_support(){
     remove_post_type_support( $post_type, 'author');
 }
 
+function my_admin_scripts() {   
+        wp_enqueue_script('media-upload');
+        wp_enqueue_script('thickbox');
+        wp_register_script('my-upload', WP_PLUGIN_URL.'/about-us-layout/image-upload.js', array('jquery','media-upload','thickbox'));
+        wp_enqueue_script('my-upload');
+
+        }
+
+function my_admin_styles() {
+    wp_enqueue_style('thickbox');
+}
+add_action('admin_enqueue_scripts', 'my_admin_scripts');
+add_action('admin_enqueue_styles', 'my_admin_styles');
+
+
+// better use get_current_screen(); or the global $current_screen
+if (isset($_GET['page']) && $_GET['page'] == 'about-us-layout') {
+    //add_action('admin_enqueue_scripts', 'my_admin_scripts');
+    //add_action('admin_enqueue_styles', 'my_admin_styles');
+} 
+
 add_action( 'add_meta_boxes', 'about_meta_box_add' );
 function about_meta_box_add(){
     add_meta_box( 'box_1', 'First Employee', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'box_1'));
     add_meta_box( 'box_2', 'Second Employee', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'box_2'));
-}
+    add_meta_box( 'box_3', 'Third Employee', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'box_3'));
+    add_meta_box( 'box_4', 'Fourth Employee', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'box_4'));
+}  
 
-function my_admin_scripts() {    
-        wp_enqueue_script('media-upload');
-        wp_enqueue_script('thickbox');
-        //wp_register_script('my-upload', WP_PLUGIN_URL.'image-upload.js', array('jquery','media-upload','thickbox'));
-        //wp_enqueue_script('my-upload');
-        }
-
-        function my_admin_styles() {
-            wp_enqueue_style('thickbox');
-        }
-
-        // better use get_current_screen(); or the global $current_screen
-        if (isset($_GET['page']) && $_GET['page'] == 'my_plugin_page') {
-
-            add_action('admin_enqueue_scripts', 'my_admin_scripts');
-            add_action('admin_enqueue_styles', 'my_admin_styles');
-        }    
 
 function about_meta_box_callback( $post, $metabox )
 {
@@ -81,25 +87,8 @@ function about_meta_box_callback( $post, $metabox )
         $body_text = isset( $values[$this_box . '_body_text'] ) ? $values[$this_box . '_body_text'][0] : '';
         $img_url = isset( $values[$this_box . '_img_url'] ) ? $values[$this_box . '_img_url'][0] : '';
         wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
-        
         ?>
-        <script>
-            jQuery(document).ready( function( jQuery ) {
-                //var imageURL = '<?php echo $this_box . "_img_url"; ?>';
-                //var imageButtonId = '<?php echo $this_box . "_img_button"; ?>';
-                jQuery('#<?php echo $this_box . "_img_button"; ?>').click(function() {
-                    formfield = jQuery('#upload_image').attr('name');
-                    tb_show( '', 'media-upload.php?type=image&amp;TB_iframe=true' );
-                    return false;
-                });
 
-                window.send_to_editor = function(html) {
-                    imgurl = jQuery('img',html).attr('src');
-                    jQuery('#<?php echo $this_box . "_img_url"; ?>').val(imgurl);
-                    tb_remove();
-                }
-            });
-        </script>  
 
             <p>
                 <label for="<?php echo $this_box . '_title_text'; ?>">Name</label>
@@ -109,9 +98,9 @@ function about_meta_box_callback( $post, $metabox )
                 <label for="<?php echo $this_box . '_body_text'; ?>">Description</label>
                 <input type="textarea" name="<?php echo $this_box . '_body_text'; ?>" id="<?php echo $this_box . '_body_text'; ?>" value="<?php echo $body_text; ?>" />
             </p>
+            
             <input id="<?php echo $this_box . '_img_url'; ?>" type="text" size="36" name="<?php echo $this_box . '_img_url'; ?>" value="<?php echo $img_url; ?>" />
-            <input id="<?php echo $this_box . "_img_button"; ?>" class="button button-primary button-large" type="button" value="Upload Image" />
-
+            <input id="<?php echo $this_box . "_img_button"; ?>" class="button button-primary button-large img-upload-btn" type="button" value="Upload Image" />
     <?php         
 }
 ?>
@@ -145,7 +134,13 @@ function about_meta_box_save( $post_id )
     if( isset( $_POST['box_1_img_url'] ) ) update_post_meta( $post_id, 'box_1_img_url', wp_kses( $_POST['box_1_img_url'], $allowed ) ); 
     if( isset( $_POST['box_2_title_text'] ) ) update_post_meta( $post_id, 'box_2_title_text', wp_kses( $_POST['box_2_title_text'], $allowed ) ); 
     if( isset( $_POST['box_2_body_text'] ) ) update_post_meta( $post_id, 'box_2_body_text', wp_kses( $_POST['box_2_body_text'], $allowed ) ); 
-    if( isset( $_POST['box_2_img_url'] ) ) update_post_meta( $post_id, 'box_2_img_url', wp_kses( $_POST['box_2_img_url'], $allowed ) ); 
+    if( isset( $_POST['box_2_img_url'] ) ) update_post_meta( $post_id, 'box_2_img_url', wp_kses( $_POST['box_2_img_url'], $allowed ) );
+    if( isset( $_POST['box_3_title_text'] ) ) update_post_meta( $post_id, 'box_3_title_text', wp_kses( $_POST['box_3_title_text'], $allowed ) ); 
+    if( isset( $_POST['box_3_body_text'] ) ) update_post_meta( $post_id, 'box_3_body_text', wp_kses( $_POST['box_3_body_text'], $allowed ) ); 
+    if( isset( $_POST['box_3_img_url'] ) ) update_post_meta( $post_id, 'box_3_img_url', wp_kses( $_POST['box_3_img_url'], $allowed ) ); 
+    if( isset( $_POST['box_4_title_text'] ) ) update_post_meta( $post_id, 'box_4_title_text', wp_kses( $_POST['box_4_title_text'], $allowed ) ); 
+    if( isset( $_POST['box_4_body_text'] ) ) update_post_meta( $post_id, 'box_4_body_text', wp_kses( $_POST['box_4_body_text'], $allowed ) ); 
+    if( isset( $_POST['box_4_img_url'] ) ) update_post_meta( $post_id, 'box_4_img_url', wp_kses( $_POST['box_4_img_url'], $allowed ) );  
     }     
 }  
 ?>
