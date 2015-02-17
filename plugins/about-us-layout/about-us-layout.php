@@ -85,6 +85,7 @@ function about_meta_box_callback( $post, $metabox )
         ?>
         <script>
             jQuery(document).ready( function( jQuery ) {
+                // might have to use these variables to break this js into it's own file
                 //var imageURL = '<?php echo $this_box . "_img_url"; ?>';
                 //var imageButtonId = '<?php echo $this_box . "_img_button"; ?>';
                 jQuery('#<?php echo $this_box . "_img_button"; ?>').click(function() {
