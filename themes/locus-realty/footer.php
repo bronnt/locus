@@ -35,7 +35,19 @@
 					</nav>
 
 					<section class="brand-area clearfix">
-						
+						<div class="socons">
+									
+							<ul class="icon-list">
+									<?php if ( !empty($themeOptions['email_url']) ) { ?>
+									<li><a title="Join Our Email List" class="email-icon" href="<?php echo $themeOptions['email_url']; ?>">email list</a></li>	
+								<?php } if ( !empty($themeOptions['facebook_url']) ) { ?>
+									<li><a title="twitter" class="facebook-icon" href="<?php echo $themeOptions['facebook_url']; ?>">facebook</a></li>	
+								<?php }?>
+
+							</ul>
+							
+						</div>								
+
 						<div class="bottom-brand">
 							<div class="spacer">
 							
@@ -44,24 +56,6 @@
 								<?php if ( !empty($themeOptions['department_logo']) ) { ?>
 									<img src="<?php echo $themeOptions['department_logo']; ?>" /><br />
 								<?php } ?>
-
-								<br />
-
-								<div class="socons">
-									
-									<ul class="icon-list">
-											<?php if ( !empty($themeOptions['email_url']) ) { ?>
-											<li><a title="Join Our Email List" class="email-icon" href="<?php echo $themeOptions['email_url']; ?>">email list</a></li>	
-										<?php } if ( !empty($themeOptions['facebook_url']) ) { ?>
-											<li><a title="twitter" class="facebook-icon" href="<?php echo $themeOptions['facebook_url']; ?>">facebook</a></li>	
-										<?php }?>
-
-
-                                            <!-- <li><a title="Join Our Email List" class="email-icon" href="#">email list</a></li>
-										    <li><a title="Link to our Facebook Page" class="facebook-icon" href="#">facebook</a></li> -->
-									</ul>
-									
-								</div>								
 
 							</div>
 						</div>

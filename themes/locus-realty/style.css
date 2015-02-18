@@ -1605,15 +1605,20 @@ Locus Contact Form
 	/* ---- branding area -----*/
 	#footer-container .brand-area {
 		float: right;
-		width: 30%;
+		width: 40%;
 		margin: 1.3em auto;
 	}
 	/* -- bottom brand --*/
 	#footer-container .bottom-brand {
 		float:left;
 		margin-top:-8px;
-		width:100%;
+		width:50%;
 	}
+	/*#footer-container .bottom-brand {
+		float:left;
+		margin-top:-8px;
+		width:100%;
+	}*/
 	#footer-container .bottom-brand .spacer{
 		margin: 0 0 1em 0
 	}
@@ -1621,8 +1626,13 @@ Locus Contact Form
 	#footer-container .address {
 		float: left;
 		margin:0;
-		width:100%;
+		width:50%;
 	}
+	/*#footer-container .address {
+		float: left;
+		margin:0;
+		width:100%;
+	}*/
 	#footer-container .address .spacer {
 		margin:0;
 	}
