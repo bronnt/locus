@@ -184,10 +184,11 @@ header#masthead *{
 	display: inline;
 	float: left;
 }
-img.locus-logo{
-	width: 149px;
-	float: left;
-	margin: -26px 0 0 0;
+img.locus-logo {
+width: 149px;
+float: none;
+margin: -26px auto 0 auto;
+display: block;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
 	#locus-logo {
@@ -408,7 +409,7 @@ background: #62b75c;
 	padding:0;
 	min-height: 100px;
 	font-size:0.9em;
-	margin-top: 88px;
+	margin-top: 0px;
 }
 
 .breadcrumb {
@@ -447,37 +448,6 @@ table.body-content-table td {
 	max-width:100%;
 	margin: 0 auto;
 }
-
-
-/* ---- brian - home page  styles ---- */
-.home-content-wrapper{
-	width: 100%;
-	padding: 0 1em 0 1em;
-}
-.copy{
-	width: 58%;
-	float: left;
-	padding-right: 1em;
-}
-.photo-cluster{
-	padding-top: 87px;
-}
-.stacked-photos{
-	width: 16.5%;
-	float: right;
-}
-.stacked-photos img{
-	margin-bottom: -14px;
-	width: 100%
-}
-.right-photo{
-	width: 25%;
-	float: right;
-}
-.right-photo img{
-	width: 100%
-}
-
 
 
 /* ------ TEMPLATE CONTAINER OPTIONS (1024 vs full-width) ------- */
@@ -817,6 +787,7 @@ hr.bar{
 	padding: 0.7em 0;
 	margin: 0;
 	font-weight: 400;
+	font-style: italic;
 }
 
 .body-callout-box .callout-image {
@@ -938,6 +909,70 @@ dd {
 .inline-img-right img, .inline-img-left img{
 	width: 100%;
 	padding:  0 0 1em 0;
+}
+
+/* ---- Locus - home page  styles ---- */
+.home-content-wrapper{
+	width: 100%;
+	padding: 0 1em 0 1em;
+}
+.copy{
+	width: 100%;
+	float: none;
+	padding-right: 0;
+}
+.photo-cluster{
+	padding-top: 1em;
+	width: 100%;
+}
+.stacked-photos{
+	display: none;
+}
+.stacked-photos img{
+	display: none;
+}
+.right-photo{
+	width: 100%;
+	float: none;
+}
+.right-photo img{
+	width: 100%;
+	padding:0!important;
+}
+.right-channel{
+	float: none;
+}
+/* ---- Locus - about page  styles ---- */
+.about img{
+	width: 100%;
+	padding-right: 0;
+}
+/*======================================
+Locus Contact Form
+======================================*/
+.contact{
+	margin: 1em 1em 0 1em;
+	padding-bottom: 1em;
+}
+.contact .contact-title{
+	font-size: 2em;
+	color: #999;
+	text-align: center;
+	padding-top: 2em;
+	font-family: 'Open Sans Condensed';
+	font-weight: 700;
+}
+.contact input[type="text"], 
+.contact input[type="email"], 
+.contact input[type="tel"], 
+.contact textarea{
+	width: 100%;
+	padding:5px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+}
+.contact textarea{
+	height:90px;
 }
 
 /* ------ Footer callout box  --  may not need these styles ------- */
@@ -1246,12 +1281,17 @@ dd {
 
 /* --------- TABLET SCREEN SIZE (PORTRAIT iPAD) ----------- */
 @media only screen and (min-width: 766px) {
-
+	img.locus-logo{
+		float: left;
+		margin: -26px 0 0 0;
+	}
 	#locus-logo {
 		background-color: #fff;
 		cursor: pointer;
 	}
-
+	#main-container{
+		margin-top: 88px;
+	}
 	.main-headline {
 		padding: 1.8em 0 1em 0;
 	}
@@ -1350,8 +1390,22 @@ dd {
 	}
 	.two-column-margin {
 	margin: 1.1em 1.1em 1.1em 0;
-}
-
+	}
+	/*locus home page*/
+	.right-photo{
+		padding-top: 86px;
+		width: 40%;
+		float: right;
+	}
+	.copy{
+		float: left;
+		width: 58%;
+	}
+	/* ---- Locus - about page  styles ---- */
+	.about img{
+		width: 18%;
+		padding-right: 1em;
+	}
 }
 
 
@@ -1447,7 +1501,11 @@ dd {
 	#top-nav ul.top-sub-menu li:first-child {
 		border-top: 0;
 	}
-	#main-container { position: relative; /*z-index:-9;*/ }
+	#main-container { 
+		position: relative;
+	 	/*z-index:-9;*/ 
+
+	 }
 
 	section.left-box{
 	  width: 19%;
@@ -1578,6 +1636,37 @@ dd {
 	}
 	#footer-container .socons li {
 		margin:0 10px 10px 0;
+	}
+	/* ---- Locus - home page tablet styles ---- */
+	.home-content-wrapper{
+		width: 100%;
+		padding: 0 1em 0 1em;
+	}
+	.copy{
+		width: 58%;
+		float: left;
+		padding-right: 1em;
+	}
+	.photo-cluster{
+		padding-top: 87px;
+	}
+	.stacked-photos{
+		display: block;
+		width: 16.5%;
+		float: right;
+	}
+	.stacked-photos img{
+		display: block;
+		margin-bottom: -14px;
+		width: 100%
+	}
+	.right-photo{
+		width: 23%;
+		float: right;
+		padding-top: 1em;
+	}
+	.right-photo img{
+		width: 100%
 	}	
 
 }
