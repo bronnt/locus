@@ -16,7 +16,27 @@ License:
 /**
 * Add custom post types.
 */
-
+add_action( 'init', 'create_homepage_post_type' );
+function create_homepage_post_type() {
+    register_post_type( 'homepage',
+        array(
+            'labels' => array(
+                'name' => __( 'Layout Homepage' ),
+                'singular_name' => __( 'homepage' )
+            ),
+        'public' => true,
+        'has_archive' => true,
+        'supports' => array(
+        'title',
+        'editor',
+        'custom-fields',
+        'revisions',
+        'thumbnail',
+        'author',
+        'page-attributes',)
+        )
+    );
+}
 
  /*
 remove wisiwig and other features from homepage custom post type
@@ -32,8 +52,8 @@ function init_homepage_remove_support(){
     remove_post_type_support( $post_type, 'author');
     remove_post_type_support( $post_type, 'slug');
     remove_post_type_support( $post_type, 'revisions');
-
-    if (class_exists('MultiPostThumbnails')) {
+    
+        if (class_exists('MultiPostThumbnails')) {
         new MultiPostThumbnails(
             array(
                 'label' => 'Small Top Left Image 150px * 150px',
@@ -56,9 +76,7 @@ function init_homepage_remove_support(){
             )
         );
     }
-
 }
-
 
 
 add_action( 'add_meta_boxes', 'home_page_meta_box_add' );
@@ -67,13 +85,6 @@ function home_page_meta_box_add()
     add_meta_box( 'box_1', 'Title', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_1'));
     add_meta_box( 'box_2', 'Paragraph 1', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_2'));
     add_meta_box( 'box_3', 'Paragraph 2', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_3'));
-    //add_meta_box( 'box_4', 'Happening Now Position 2', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_4'));
-    /*add_meta_box( 'box_5', 'Happening Now Position 3', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_5'));
-    add_meta_box( 'box_6', 'Happening Now Position 4', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_6'));
-    add_meta_box( 'box_7', 'Happening Now Position 5', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_7'));
-    add_meta_box( 'box_8', 'Happening Now Position 6', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_8'));
-    add_meta_box( 'box_9', 'Happening Now Position 7', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_9'));
-    add_meta_box( 'box_10', 'Happening Now Position 8', 'home_page_meta_box_callback', 'home_page', 'normal', 'high', array( 'box_id' => 'box_10'));*/
 }
 
 function home_page_meta_box_callback( $post, $metabox )
@@ -82,12 +93,8 @@ function home_page_meta_box_callback( $post, $metabox )
         $this_box = $metabox['args']['box_id'];
         $text = isset( $values[$this_box . '_text'] ) ? $values[$this_box . '_text'][0] : '';
         wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
-        ?>  
-            <p>
-                
-                <textarea class="widefat" cols="50" rows="4" name="<?php echo $this_box . '_text'; ?>" id="<?php echo $this_box . '_text'; ?>" value="<?php echo $text; ?>"><?php echo $text; ?></textarea>
-            </p>
-    <?php    
+        $box_name = $this_box . '_text';
+        echo '<p><textarea class="widefat" cols="50" rows="4" name="' .$box_name. '" id="' .$box_name. '" value="' .$text. '">' .$text. '</textarea></p>'; 
 }
 
 add_action( 'save_post', 'home_page_meta_box_save' );
@@ -115,13 +122,6 @@ function home_page_meta_box_save( $post_id )
     if( isset( $_POST['box_1_text'] ) ) update_post_meta( $post_id, 'box_1_text', wp_kses( $_POST['box_1_text'], $allowed ) );    
     if( isset( $_POST['box_2_text'] ) ) update_post_meta( $post_id, 'box_2_text', wp_kses( $_POST['box_2_text'], $allowed ) );
     if( isset( $_POST['box_3_text'] ) ) update_post_meta( $post_id, 'box_3_text', wp_kses( $_POST['box_3_text'], $allowed ) );    
-    if( isset( $_POST['box_4_text'] ) ) update_post_meta( $post_id, 'box_4_text', wp_kses( $_POST['box_4_text'], $allowed ) );
-    if( isset( $_POST['box_5_text'] ) ) update_post_meta( $post_id, 'box_5_text', wp_kses( $_POST['box_5_text'], $allowed ) );    
-    if( isset( $_POST['box_6_text'] ) ) update_post_meta( $post_id, 'box_6_text', wp_kses( $_POST['box_6_text'], $allowed ) );
-    if( isset( $_POST['box_7_text'] ) ) update_post_meta( $post_id, 'box_7_text', wp_kses( $_POST['box_7_text'], $allowed ) );    
-    if( isset( $_POST['box_8_text'] ) ) update_post_meta( $post_id, 'box_8_text', wp_kses( $_POST['box_8_text'], $allowed ) );
-    if( isset( $_POST['box_9_text'] ) ) update_post_meta( $post_id, 'box_9_text', wp_kses( $_POST['box_9_text'], $allowed ) );    
-    if( isset( $_POST['box_10_text'] ) ) update_post_meta( $post_id, 'box_10_text', wp_kses( $_POST['box_10_text'], $allowed ) );
     }     
 }  
 

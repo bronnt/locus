@@ -185,32 +185,11 @@ function ie_style_sheets () {
 }
 add_action ('wp_enqueue_scripts','ie_style_sheets');
 
-
-add_action( 'init', 'create_post_type' );
-function create_post_type() {
-    register_post_type( 'homepage',
-        array(
-            'labels' => array(
-                'name' => __( 'Layout Home Pg' ),
-                'singular_name' => __( 'homepage' )
-            ),
-        'public' => true,
-        'has_archive' => true,
-        'supports' => array(
-        'title',
-        'editor',
-        'custom-fields',
-        'revisions',
-        'thumbnail',
-        'author',
-        'page-attributes',)
-        )
-    );
-}
-
 /**
  * use homepage custom post type for front page
  * Note: you also must use single-homepage.php to display the content
+ * Also, you must use the slug from the custom post type page in conjunctiion
+ * with page-[slug-name]
  */
 
 
@@ -227,11 +206,10 @@ add_filter( 'get_pages', 'add_homepage_cpt_to_dropdown' );
 
 function enable_front_page_homepage_cpt( $query ){
     if('' == $query->query_vars['post_type'] && 0 != $query->query_vars['page_id']){
-    	$query->query_vars['post_type'] = array( 'page', 'homepage' );
+        $query->query_vars['post_type'] = array( 'page', 'homepage' );
     }
 }
 add_action( 'pre_get_posts', 'enable_front_page_homepage_cpt' );
-
 
 
 /**

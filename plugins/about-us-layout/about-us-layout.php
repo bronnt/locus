@@ -64,12 +64,6 @@ add_action('admin_enqueue_scripts', 'my_admin_scripts');
 add_action('admin_enqueue_styles', 'my_admin_styles');
 
 
-// better use get_current_screen(); or the global $current_screen
-if (isset($_GET['page']) && $_GET['page'] == 'about-us-layout') {
-    //add_action('admin_enqueue_scripts', 'my_admin_scripts');
-    //add_action('admin_enqueue_styles', 'my_admin_styles');
-} 
-
 add_action( 'add_meta_boxes', 'about_meta_box_add' );
 function about_meta_box_add(){
     add_meta_box( 'box_1', 'First Employee', 'about_meta_box_callback', 'about', 'normal', 'high', array( 'box_id' => 'box_1'));
@@ -103,9 +97,7 @@ function about_meta_box_callback( $post, $metabox )
             <input id="<?php echo $this_box . "_img_button"; ?>" class="button button-primary button-large img-upload-btn" type="button" value="Upload Image" />
     <?php         
 }
-?>
 
-<?php  
 add_action( 'save_post', 'about_meta_box_save' );
 function about_meta_box_save( $post_id )
 {   
