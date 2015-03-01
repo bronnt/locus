@@ -32,8 +32,9 @@
 					'after'       => '</h3>',
 					'items_wrap'    => '<ul id="%1$s" class="%2$s" rel="bottom">%3$s</ul>'
 				) ); ?>
-					</nav>
+				<?php wp_register(); ?>
 
+					</nav>
 					<section class="brand-area clearfix">
 						<div class="socons">
 									
@@ -41,7 +42,7 @@
 									<?php if ( !empty($themeOptions['email_url']) ) { ?>
 									<li><a title="Join Our Email List" class="email-icon" href="<?php echo $themeOptions['email_url']; ?>">email list</a></li>	
 								<?php } if ( !empty($themeOptions['facebook_url']) ) { ?>
-									<li><a title="twitter" class="facebook-icon" href="<?php echo $themeOptions['facebook_url']; ?>">facebook</a></li>	
+									<li><a title="Visit our Facebook Page" target="_blank" class="facebook-icon" href="<?php echo $themeOptions['facebook_url']; ?>">facebook</a></li>	
 								<?php }?>
 
 							</ul>

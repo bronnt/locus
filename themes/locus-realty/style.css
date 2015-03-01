@@ -962,6 +962,15 @@ Locus Contact Form
 	font-family: 'Open Sans Condensed';
 	font-weight: 700;
 }
+.contact .e-list-title{
+	font-size: 2em;
+	color: #999;
+	text-align: center;
+	padding-top: 10px;
+	font-family: 'Open Sans Condensed';
+	font-weight: 700;
+	line-height: 1em;
+}
 .contact input[type="text"], 
 .contact input[type="email"], 
 .contact input[type="tel"], 
@@ -1301,11 +1310,12 @@ Locus Contact Form
 	#top-nav {
 		width: 330px;
 		display: inline;
-		float: right;
-		margin: -60px 1em 0 0;
+		/* float: right; */
+		margin: 29px 0 0 0;
 		background: transparent;
-	}
-
+		right: 20px;
+		position: absolute;
+		}
 	#top-nav ul.top-menu {
 		width: 330px;
 		position: absolute;
@@ -1420,13 +1430,18 @@ Locus Contact Form
 		font-size: 2.3em;
 		padding-top: 0.3em;
 	}	
-
 	#top-nav {
-		margin: -61px 0px 0 0;
+		background: transparent;
+		float: right;
+		display: inline;
+		margin: -90px 0px 0 0;
 		width: auto;
 		z-index: 9999;
+		position: static;
 	}	
-
+	#top-nav ul.top-menu li h3{
+		padding: 32px 15px;
+	}
 	#top-nav a.top-mobile-nav {
 		display: none;
 	}
@@ -1454,11 +1469,11 @@ Locus Contact Form
 	}
 
 	#top-nav ul.top-menu li:hover {
-		background: #000;
+		background: #333;
 	}
 
 	#top-nav ul.top-menu li.selected {
-		background: #000;
+		background: #333;
 	}
 
 	#top-nav ul.top-menu li a {
