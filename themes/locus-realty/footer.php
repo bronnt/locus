@@ -32,7 +32,7 @@
 					'after'       => '</h3>',
 					'items_wrap'    => '<ul id="%1$s" class="%2$s" rel="bottom">%3$s</ul>'
 				) ); ?>
-				<?php wp_register(); ?>
+				<?php //wp_register(); ?>
 
 					</nav>
 					<section class="brand-area clearfix">
