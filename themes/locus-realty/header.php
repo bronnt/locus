@@ -19,8 +19,10 @@
 
 <link rel="icon" href="/wp-content/themes/umc2014/images/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="/wp-content/themes/umc2014/images/apple-touch-icon.png">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>   
+<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'> 
+<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>   -->
+<link href='http://fonts.googleapis.com/css?family=Vollkorn|Open+Sans+Condensed:300,700,300italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 
 <?php wp_head(); ?>
 <!--[if lte IE 8]>

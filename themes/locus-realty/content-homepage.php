@@ -18,17 +18,27 @@
 			$title = $custom_fields[box_1_text][0];
 			$paragraph_1 = $custom_fields[box_2_text][0];
 			$paragraph_2 = $custom_fields[box_3_text][0];
+			$paragraph_3 = $custom_fields[box_4_text][0];
+			$paragraph_4 = $custom_fields[box_5_text][0];
 		?>
 	
 <div class="home-content-wrapper">
 	<div class='copy'>	
-		<?php if (isset($title)):?>
-		<h2 class="page-title"><?php echo $title; ?></h2>
-		<?php endif ?>
-		<p><?php echo $paragraph_1; ?></p>
-		<?php if (isset($paragraph_2)):?>
-			<p><?php echo $paragraph_2; ?></p>
-		<?php endif ?>
+		<h2 class="page-title"><?php the_title(); ?></h2>
+		<?php the_content(); ?>
+		<?php// if (isset($title)):?>
+		
+		<?php// endif ?>
+		<!-- <p><?php// echo $paragraph_1; ?></p>
+		<?php// if (isset($paragraph_2)):?>
+		<p><?php// echo $paragraph_2; ?></p>
+		<?php// endif ?>
+		<?php// if (isset($paragraph_3)):?>
+		<p><?php// echo $paragraph_3; ?></p>
+		<?php// endif ?>
+		<?php// if (isset($paragraph_4)):?>
+		<p><?php// echo $paragraph_4; ?></p> -->
+		<?php// endif ?>
 	</div>
 <div class='photo-cluster'>
 	<div class='right-photo'>

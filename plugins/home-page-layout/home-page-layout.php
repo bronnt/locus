@@ -44,7 +44,7 @@ remove wisiwig and other features from homepage custom post type
 add_action('init', 'init_homepage_remove_support',100);
 function init_homepage_remove_support(){
     $post_type = 'homepage';
-    remove_post_type_support( $post_type, 'editor');
+    //remove_post_type_support( $post_type, 'editor');
     remove_post_type_support( $post_type, 'comments');
     remove_post_type_support( $post_type, 'trackbacks');
     remove_post_type_support( $post_type, 'page-attributes');
@@ -82,9 +82,11 @@ function init_homepage_remove_support(){
 add_action( 'add_meta_boxes', 'home_page_meta_box_add' );
 function home_page_meta_box_add()
 {
-    add_meta_box( 'box_1', 'Title', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_1'));
-    add_meta_box( 'box_2', 'Paragraph 1', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_2'));
-    add_meta_box( 'box_3', 'Paragraph 2', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_3'));
+   add_meta_box( 'box_1', 'Title', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_1'));
+   // add_meta_box( 'box_2', 'Paragraph 1', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_2'));
+   // add_meta_box( 'box_3', 'Paragraph 2', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_3'));
+   // add_meta_box( 'box_4', 'Paragraph 3', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_4'));
+   // add_meta_box( 'box_5', 'Paragraph 4', 'home_page_meta_box_callback', 'homepage', 'normal', 'high', array( 'box_id' => 'box_5'));
 }
 
 function home_page_meta_box_callback( $post, $metabox )
@@ -121,7 +123,9 @@ function home_page_meta_box_save( $post_id )
 // Make sure your data is set before trying to save it
     if( isset( $_POST['box_1_text'] ) ) update_post_meta( $post_id, 'box_1_text', wp_kses( $_POST['box_1_text'], $allowed ) );    
     if( isset( $_POST['box_2_text'] ) ) update_post_meta( $post_id, 'box_2_text', wp_kses( $_POST['box_2_text'], $allowed ) );
-    if( isset( $_POST['box_3_text'] ) ) update_post_meta( $post_id, 'box_3_text', wp_kses( $_POST['box_3_text'], $allowed ) );    
+    if( isset( $_POST['box_3_text'] ) ) update_post_meta( $post_id, 'box_3_text', wp_kses( $_POST['box_3_text'], $allowed ) );   
+    if( isset( $_POST['box_4_text'] ) ) update_post_meta( $post_id, 'box_4_text', wp_kses( $_POST['box_4_text'], $allowed ) );
+    if( isset( $_POST['box_5_text'] ) ) update_post_meta( $post_id, 'box_5_text', wp_kses( $_POST['box_5_text'], $allowed ) );   
     }     
 }  
 
