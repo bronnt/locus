@@ -64,6 +64,10 @@ jQuery(document).ready(function() {
 	jQuery('#top-nav').find('.sub-menu').addClass('top-sub-menu');
 	jQuery('#bottom-nav').find('.sub-menu').addClass('bottom-sub-menu');
 
+
+	//brian added on 4-8-15
+	jQuery('#top-nav .sub-menu').parents('.top-menu').css('overflow', 'visible');
+
 	jQuery('.sub-menu').find('a').unwrap();
 
 	// remove the anchor tags from top level navigation for full screen view
